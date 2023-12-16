@@ -4,6 +4,15 @@ import path from 'path'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { App } from '../client/components/app'
+
+
+// import { StaticRouter, matchPath } from 'react-router-dom'
+// import Helmet from 'react-helmet'
+// import routes from './routes'
+// import Layout from './components/Layout'
+// import { Provider } from 'mobx-react'
+// import { User } from './store'
+// import { fetchUsers } from './api'
  
 const server = express()
  
