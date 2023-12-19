@@ -29,6 +29,13 @@ module.exports = {
           configFile: 'tsconfig.server.json',
         },
       },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      }
     ],
   },
   plugins: [

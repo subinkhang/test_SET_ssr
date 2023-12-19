@@ -1,29 +1,63 @@
-import React from 'react';
-import Home from './Home';
- 
-// export const App: React.FC = () => {
-//     let routes = useRoutes([
-//         {path: '/', element: <Home />},
-//         {path: '/about', element: <About />},
-//     ]);
-    
-//     return routes;
-// }
- 
-// export const App: React.FC = () => {
-//   return(
-//     <>
-//       <Routes>
-//         <Route path ="/" element={<Home />} />
-//         <Route path ="/about" element={<About />} />
-//       </Routes>
-//     </>
-//   )
-// }
+import React, {
+  useState,
+}
+  from 'react';
+import Button from './Button';
+import ButtonBox from './ButtonBox';
+import Screen from './Screen';
+import Wrapper from './Wrapper';
 
-export const App: React.FC = () => {
+
+// const btnValues = [
+//   ["AC", "+/-", "%", "/"],
+//   ['7', '8', '9', "x"],
+//   ['4', '5', '6', "-"],
+//   ['1', '2', '3', "+"],
+//   ['000', ",", "="],
+// ];
+const btnValues = [
+  ["C", "+-", "%", "/"],
+  [7, 8, 9, "X"],
+  [4, 5, 6, "-"],
+  [1, 2, 3, "+"],
+  [0, ".", "="],
+];
+
+interface Props {
+  key: number;
+  className: string;
+  value: string|number;
+  onClick: (e: any) => void;  
+  // children: React.JSX.Element|React.JSX.Element[]
+}
+
+
+
+export const App: React.FC<Props> = () => { 
+
+
+  
+  
   return (
-    <Home />
+    <Wrapper>
+      <>
+        <Screen value={0} />
+        <ButtonBox>
+          {
+            btnValues.flat().map((btn, i) => {
+              return (
+                <Button
+                  key={i}
+                  className={btn === "=" ? "equals" : ""}
+                  value={btn}
+                  onClick={() => {}}
+                />
+              );
+            })
+          }
+        </ButtonBox>
+      </>
+    </Wrapper>
   );
 };
 
