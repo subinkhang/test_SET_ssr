@@ -1,13 +1,17 @@
-// // import { createContext } from "react";
+// import { createContext } from "react";
 // import React from "react";
+import { createContext, Dispatch, SetStateAction } from "react";
 
-// // interface AppContextProps {
-// //     handleClick: () => void; // Khai báo type cho handleClick
-// //   }
+interface AppContextProps {
+    handleClick: () => void;
+    ac: string;
+    setAc: Dispatch<SetStateAction<string>>;
+  }
+  
+const AppContext = createContext<AppContextProps>({
+  handleClick: () => {},
+  ac: "AC",
+  setAc: () => {}, // Cung cấp giá trị mặc định cho handleClick
+});
 
-// const AppContext = React.createContext({
-//   handleClick: () => {console.log('kk');
-//   }, // Cung cấp hàm handleClick mặc định
-// });
-
-// export default AppContext;
+export default AppContext;

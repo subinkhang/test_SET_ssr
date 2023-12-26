@@ -4,7 +4,7 @@ import React from "react";
 interface Props {
   className: string;
   value: string|number;
-  onClick: () => void;
+  onClick: (e: any) => void;
 }
 
 const Button = ({ className, value, onClick }: Props) => {  

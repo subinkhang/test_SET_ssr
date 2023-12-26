@@ -3,6 +3,19 @@ import ReactDOM from 'react-dom';
 import { App } from './components/app';
 import { Provider } from 'mobx-react';
 import './client.css';
+// import { createRoot } from 'react-dom/client';
+// import { BrowserRouter } from 'react-router-dom';
+
+const app = document.getElementById('root');
+
+// if(app) {
+//   const root = createRoot(app);
+//   root.render(
+//     <BrowserRouter>
+//       <App />
+//     </BrowserRouter>
+//   );
+// }
 
 const jsx = (
   <Provider>
@@ -12,7 +25,6 @@ const jsx = (
   </Provider>
 );
   
-const app = document.getElementById('app');
 // eslint-disable-next-line react/no-deprecated
 ReactDOM.hydrate(jsx, app);
 
