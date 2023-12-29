@@ -1,34 +1,28 @@
-import AppContext from "./AppContext";
-import React,
-{ useContext, useState }
-  from "react";
+// import AppContext from "./AppContext";
+// import React,
+// { useContext, useState }
+//   from "react";
 
-interface AppProviderProps {
-    children: React.JSX.Element|React.JSX.Element[]
-}
+// interface AppProviderProps {
+//     children: React.JSX.Element|React.JSX.Element[]
+// }
 
-const AppProvider = ({ children }: AppProviderProps) => {
+// const AppProvider = ({ children }: AppProviderProps) => {
 
-  const handleClick = () => {
-    console.log('ok');
-    // Sử dụng handleClick từ AppContext
-    useContext(AppContext).handleClick();
-  };
+//   const handleClick = () => {
+//     console.log('ok');
+//     // Sử dụng handleClick từ AppContext
+//     useContext(AppContext).handleClick();
+//   };
 
-  // const [calc, setCalc] = useState({
-  //   sign: "",
-  //   num: 0,
-  //   res: 0,
-  // });
-
-  const [ac, setAc] = useState("AC");
+//   const [ac, setAc] = useState("AC");
       
 
-  return(
-    <AppContext.Provider value={{ handleClick, ac, setAc }}>
-      {children}
-    </AppContext.Provider>
-  );
-};
+//   return(
+//     <AppContext.Provider value={{ handleClick, ac, setAc }}>
+//       {children}
+//     </AppContext.Provider>
+//   );
+// };
 
-export default AppProvider;
+// export default AppProvider;

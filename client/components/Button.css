@@ -16,6 +16,14 @@ button {
   .zero {
     grid-column: 1 / 3;
   }
+
+  .orangeButton, .equals {
+    background-color: #fbb034;
+  }
+
+  .greyButton {
+    background-color: #5454548b;
+  }
   
   /* .equals:hover {
     background-color: #fbb034;

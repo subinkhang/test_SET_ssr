@@ -2,23 +2,20 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import React from 'react';
-import ReactDOMServer from 'react-dom/server';
+import * as ReactDOMServer from 'react-dom/server';
+
+
+
+import { StaticRouter } from 'react-router-dom/server';
 import { App } from '../client/components/app';
-
-
-// import { StaticRouter, matchPath } from 'react-router-dom'
 // import Helmet from 'react-helmet'
-// import routes from './routes'
+// import routes from './routes';
 // import Layout from './components/Layout'
 // import { Provider } from 'mobx-react'
 // import { User } from './store'
 // import { fetchUsers } from './api'
  
 const server = express();
- 
-// server.get('/', (req, res) => {
-//   res.send('Hello from Server')
-// })
 
 server.set('view engine', 'ejs');
 server.set('views', path.join(__dirname, 'views'));
@@ -31,8 +28,12 @@ const manifest = fs.readFileSync(
 );
 const assets = JSON.parse(manifest);
  
-server.get('/', (req, res) => {
-  const component = ReactDOMServer.renderToString(React.createElement(App));
+server.get('*', (req, res) => {
+  const component = ReactDOMServer.renderToString(
+    <StaticRouter location={req.url}>
+      <App />
+    </StaticRouter>,
+  );
   res.render('client', { assets, component });
 });
 
