@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { App } from './components/app';
+import { App } from './app';
 // import { Provider } from 'mobx-react';
-import './client.css';
+import './client.scss';
 import { BrowserRouter } from 'react-router-dom';
 
 const app = document.getElementById('root');

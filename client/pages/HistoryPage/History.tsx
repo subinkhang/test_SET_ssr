@@ -9,7 +9,7 @@ const History = () => {
 
   return (
     <div>
-      <h1>Lịch sử tính toán</h1>
+      <h1>History</h1>
       <ul>
         {historyArray.map((entry: any, index: any) => (
           <li key={index}>{entry}</li>

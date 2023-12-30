@@ -1,19 +1,22 @@
 import React, {
   useState,
   // useContext,
-  useEffect
+  useEffect,
+  useRef
 }
   from 'react';
-import Button from './Button';
-import ButtonBox from './ButtonBox';
-import Screen from './Screen';
-import Wrapper from './Wrapper';
-// import AppProvider from '../contexts/AppProvider';
+import Button from './components/Button/Button';
+import ButtonBox from './components/ButtonBox/ButtonBox';
+import Screen from './components/Screen/Screen';
+import Wrapper from './components/Wrapper/Wrapper';
   
 const removeSpaces = (num: any) => String(num).replace(/\s/g, "");
   
 export const Calculator: React.FC = () => {
+
+  // declare variable ===================================================================================================================
   const [ac, setAc] = useState("AC");
+  // const [save, setSave] = useState(false);
   
   const btnValues = [
     [ac, "+/-", "%", "/"],
@@ -36,6 +39,54 @@ export const Calculator: React.FC = () => {
       setAc("C");
   });
   
+
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleInputChange = (e: any) => {  
+    e.preventDefault();
+    const value = e.target.value;
+    const operators = value.match(/[+-/x]/g);
+    const lastOperator = operators[operators.length - 1];
+
+    setCalc({
+      ...calc,
+      num: e.target.value,
+      res: "",
+      sign: lastOperator,
+    });    
+  };
+
+  const handleSave = (e: any) => {
+    e.preventDefault();
+    const value = e.target.value;
+    const operators = value.match(/[+-/x]/g);
+    const lastOperator = operators[operators.length - 1];
+
+    setCalc({
+      ...calc,
+      num: removeSpaces(value),
+      res: !calc.sign ? "0" : calc.res,
+      sign: lastOperator
+    });
+  };
+
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleClickOutside = (e: any) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+        setIsEditing(false);
+      }
+    };
+  
+    document.addEventListener("mousedown", handleClickOutside);
+  
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+
+  // functions =======================================================================================================================================
   function addToHistory(calculation: string) {
     const history = localStorage.getItem('history') || '[]';
     try {
@@ -43,13 +94,13 @@ export const Calculator: React.FC = () => {
       historyArray.push(calculation);
       localStorage.setItem('history', JSON.stringify(historyArray));
     } catch (error) {
-      console.error('Lỗi lưu trữ lịch sử:', error);
+      console.error('Error: ', error);
     }
   }  
   
   const numClickHandler = (e: any) => {
     e.preventDefault();
-    const value = e.target.innerHTML;    
+    const value = e.target.innerHTML;
   
     if (calc.num.toString().length < 16) {  
       let startNum = calc.num;
@@ -65,13 +116,10 @@ export const Calculator: React.FC = () => {
                 : String(startNum + value),
         res: !calc.sign ? "0" : calc.res,
       });
-      console.log();
-        
     }
   };
   
   const commaClickHandler = (e: any) => {
-    console.log('comma');
     e.preventDefault();
     const value = e.target.innerHTML;
   
@@ -97,6 +145,7 @@ export const Calculator: React.FC = () => {
   };
   
   const equalsClickHandler = () => {
+    setIsEditing(false);
     const parts = calc.num.split(/[^0-9]/);
     const operators = calc.num.match(/[+-/x]/g);
     const lastNum = parts[parts.length - 1];
@@ -147,7 +196,7 @@ export const Calculator: React.FC = () => {
           }
   
           finalResult += currentNum;
-        }}        
+        }}                
   
       setCalc({
         ...calc,
@@ -163,7 +212,6 @@ export const Calculator: React.FC = () => {
       });
   
       addToHistory(`${calc.num} = ${finalResult}`);
-  
     }
   };
   
@@ -189,7 +237,6 @@ export const Calculator: React.FC = () => {
   };
   
   const resetClickHandler = () => {
-    console.log('reset');    
     setCalc({
       ...calc,
       sign: "",
@@ -199,11 +246,27 @@ export const Calculator: React.FC = () => {
   };  
     
   return (
-    <Wrapper>
-      <Screen 
-        value={calc.num ? calc.num : calc.res}
-        role="screen"
-      />
+    <Wrapper ref={wrapperRef}>
+      {isEditing ? (
+        <input
+          type="text"
+          value={calc.num ? calc.num : calc.res}
+          onBlur={(e) => {
+            handleSave(e);
+            setIsEditing(false);
+          }}
+          className='screen input'
+          onChange={(e) => handleInputChange(e)}
+        />
+      ) : (
+        <Screen
+          value={calc.num ? calc.num : calc.res}
+          role="screen"
+          onClick={() => {
+            setIsEditing(true);
+          }}
+        />
+      )}
       <ButtonBox>
         {
           btnValues.flat().map((btn, i) => {

@@ -1,8 +1,8 @@
 import React from 'react';
 import {  Routes, Route } from 'react-router-dom';
-import History from './History';
-import Calculator from './Calculator';
-import Hello from './Hello';
+import History from './pages/HistoryPage/History';
+import Calculator from './pages/CalculatorPage/Calculator';
+import Hello from './pages/HomePage/Home';
 
 export const App: React.FC = () => {
   return (

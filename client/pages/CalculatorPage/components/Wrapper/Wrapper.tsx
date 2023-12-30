@@ -1,8 +1,9 @@
-import "./Wrapper.css";
+import "./Wrapper.scss";
 import React from "react";
 
 interface Props {
-  children: React.JSX.Element|React.JSX.Element[]
+  children: React.JSX.Element|React.JSX.Element[];
+  ref: any
 }
 
 // (alias) const Wrapper: ({ children }: Props) => React.JSX.Element

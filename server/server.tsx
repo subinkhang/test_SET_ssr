@@ -7,7 +7,7 @@ import * as ReactDOMServer from 'react-dom/server';
 
 
 import { StaticRouter } from 'react-router-dom/server';
-import { App } from '../client/components/app';
+import { App } from '../client/app';
 // import Helmet from 'react-helmet'
 // import routes from './routes';
 // import Layout from './components/Layout'
