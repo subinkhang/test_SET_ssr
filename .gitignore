@@ -1,2 +1,21 @@
-# Bỏ qua tất cả các thư mục node_modules
-node_modules
+# Ignore node_modules directory
+node_modules/
+
+# Ignore build output
+dist/
+
+# Ignore IDE and editor files
+.vscode/
+.idea/
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+
+# Ignore environment-specific files
+.env
+.env.local
+.env.*.local
+
+# Ignore sensitive or private information
+secrets.json
