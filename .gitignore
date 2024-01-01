@@ -4,8 +4,5 @@ node_modules/
 # Ignore build output
 dist/
 
-# Ignore IDE and editor files
-.vscode/
-
 # Ignore logs and temporary files
 *.log
